@@ -1,16 +1,38 @@
-﻿void Get_Dot(double k1, double k2, double b1, double b2)
+﻿int[,] GetArray(int m, int n, int minValue, int maxValue) 
 {
-    Console.WriteLine("X = " + (b2-b1)/(k1-k2));
-    Console.WriteLine("Y = " + (k2*((b2-b1)/(k1-k2))+b2));    
+    int[,] result = new int[m, n];
+
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            result[i, j] = new Random().Next(minValue, maxValue + 1);
+        }
+    }
+
+    return result;
 }
 
+void Get_info(int[,] array, int x, int y)
+{
+    if(array.GetLength(0) >= x && array.GetLength(1) >= y)
+    {
+        Console.Write(array[x,y]);
+    }
+    else
+    {
+        Console.Write("Введены превышающие размер массива данные");
+    }
+    
+}
 Console.Clear();
-Console.Write("Введите k1: ");
-double k1 = double.Parse(Console.ReadLine()!);
-Console.Write("Введите k2: ");
-double k2 = double.Parse(Console.ReadLine()!);
-Console.Write("Введите b1: ");
-double b1 = double.Parse(Console.ReadLine()!);
-Console.Write("Введите b2: ");
-double b2 = double.Parse(Console.ReadLine()!);
-Get_Dot(k1, k2, b1, b2);
+Console.Write("Введите кол-во строк массива: ");
+int rows = int.Parse(Console.ReadLine()!);
+Console.Write("Введите кол-во столбцов массива: ");
+int cols = int.Parse(Console.ReadLine()!);
+Console.Write("Введите строчку: ");
+int x = int.Parse(Console.ReadLine()!);
+Console.Write("Введите столбец: ");
+int y = int.Parse(Console.ReadLine()!);
+int[,] array = GetArray(rows, cols, 0, 9);
+Get_info(array, x, y);
