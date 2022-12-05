@@ -1,38 +1,38 @@
-﻿int[,] GetArray(int m, int n, int minValue, int maxValue) 
+﻿int[] GetArray(int m) 
 {
-    int[,] result = new int[m, n];
+    int[] result = new int[m];
 
     for (int i = 0; i < m; i++)
     {
-        for (int j = 0; j < n; j++)
-        {
-            result[i, j] = new Random().Next(minValue, maxValue + 1);
-        }
+        result[i] = new Random().Next(-100,101);
     }
-
     return result;
 }
 
-void Get_info(int[,] array, int x, int y)
+void PrintArray(int[] inArray)
 {
-    if(array.GetLength(0) >= x && array.GetLength(1) >= y)
+    for (int i = 0; i < inArray.GetLength(0); i++)
     {
-        Console.Write(array[x,y]);
+        Console.Write(inArray[i] + " ");
     }
-    else
+    Console.WriteLine(" ");
+}
+
+void PrintOddSum(int[] inArray)
+{
+    int sum = 0;
+    for (int i = 0; i < inArray.GetLength(0); i++)
     {
-        Console.Write("Введены превышающие размер массива данные");
+        if(i % 2 ==1)
+        {
+            sum+=inArray[i];
+        }
     }
-    
+    Console.Write(sum);
 }
 Console.Clear();
-Console.Write("Введите кол-во строк массива: ");
+Console.Write("Введите кол-во элементов массива: ");
 int rows = int.Parse(Console.ReadLine()!);
-Console.Write("Введите кол-во столбцов массива: ");
-int cols = int.Parse(Console.ReadLine()!);
-Console.Write("Введите строчку: ");
-int x = int.Parse(Console.ReadLine()!);
-Console.Write("Введите столбец: ");
-int y = int.Parse(Console.ReadLine()!);
-int[,] array = GetArray(rows, cols, 0, 9);
-Get_info(array, x, y);
+int[] array = GetArray(rows);
+PrintArray(array);
+PrintOddSum(array);
