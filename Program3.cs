@@ -1,49 +1,46 @@
-﻿int[,] GetArray(int m, int n) 
+﻿double[] GetArray(int m) 
 {
-    int[,] result = new int[m, n];
+    double[] result = new double[m];
 
     for (int i = 0; i < m; i++)
     {
-        for (int j = 0; j < n; j++)
-        {
-            result[i, j] = new Random().Next(0, 9);
-        }
+        result[i] = Math.Round(new Random().NextDouble(), 2);
     }
-
     return result;
 }
 
-void PrintArray(int[,] inArray)
+void PrintArray(double[] inArray)
 {
     for (int i = 0; i < inArray.GetLength(0); i++)
     {
-        for (int j = 0; j < inArray.GetLength(1); j++)
-        {
-            Console.Write($"{inArray[i, j]}\t ");
-        }
-        Console.WriteLine();
+        Console.Write(inArray[i] + " ");
     }
-    Console.WriteLine();
+    Console.WriteLine(" ");
 }
 
-void Find_average(int[,] inArray)
+void PrintDiffMinMax(double[] inArray)
 {
-    double sum;
-    for (int i = 0; i < inArray.GetLength(1); i++)
+    double min = 2;
+    double max = 0;
+    for (int i = 0; i < inArray.GetLength(0); i++)
     {
-        sum = 0;
-        for (int j = 0; j < inArray.GetLength(0); j++)
+        if(inArray[i]>max)
         {
-            sum += inArray[j,i];
+            max = inArray[i];
         }
-        Console.Write(Math.Round(sum/inArray.GetLength(0),2) + " ");
+        else
+        {
+            if(inArray[i]<min)
+            {
+                min = inArray[i];
+            }
+        }
     }
+    Console.Write("Разница между max и min = " + Math.Round(max-min,2));
 }
 Console.Clear();
-Console.Write("Введите кол-во строк массива: ");
+Console.Write("Введите кол-во элементов массива: ");
 int rows = int.Parse(Console.ReadLine()!);
-Console.Write("Введите кол-во столбцов массива: ");
-int cols = int.Parse(Console.ReadLine()!);
-int[,] array = GetArray(rows, cols);
+double[] array = GetArray(rows);
 PrintArray(array);
-Find_average(array);
+PrintDiffMinMax(array);
